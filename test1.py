@@ -1,11 +1,12 @@
 from ant_colony import Ant_colony 
-test_nodes = {0: (0, 7), 1: (3, 9), 2: (12, 4), 3: (14, 11), 4: (8, 11), 5: (15, 6), 6: (6, 15), 7: (15, 9), 8: (12, 10), 9: (10, 7)}
-n = int(input("enter the number of processes"))
-# test_nodes={}
-print("Enter the arriving time and burst time of all the process")
-# for i in range(n):
-# 	temp=raw_input().split(",")
-# 	test_nodes[i]=(int(temp[0]),int(temp[1]))
+test_nodes = {0: (0, 17), 1: (3, 9), 2: (12, 4), 3: (14, 11), 4: (8, 11), 5: (15, 6), 6: (6, 45), 7: (15, 9), 8: (12, 10), 9: (10, 70)}
+n=10
+#n = int(input("enter the number of processes"))
+	# test_nodes={}
+	# print("Enter the arriving time and burst time of all the process")
+	# for i in range(n):
+	# 	temp=raw_input().split(",")
+	# 	test_nodes[i]=(int(temp[0]),int(temp[1]))
 
 def distance(start, end):
 	x_distance = abs(start[0] - end[0])
@@ -29,6 +30,8 @@ def waitingTime(i):
 	time=0
 	total=0
 	for j in range(n):
+		if time<test_nodes[answer[t]][0]:
+			time=test_nodes[answer[t]][0]
 		temp=time-test_nodes[answer[t]][0]
 		print "waiting time for process ",t ," is ",temp
 		time +=test_nodes[answer[t]][1]
@@ -41,26 +44,14 @@ def turnAroundTime():
 	time=0
 	total=0
 	for j in range(n):
+		if time<test_nodes[answer[t]][0]:
+			time=test_nodes[answer[t]][0]
 		temp=time-test_nodes[answer[t]][0]+test_nodes[answer[t]][1]
 		print "turn around time of process ",t," is " ,temp
 		time +=test_nodes[answer[t]][1]
 		total+=temp
 		t+=1
-	# t=0
-	# time=0
-	# for j in range(n):
-	# 	startTime=test_nodes[answer[t]][0]
-	# 	burst=test_nodes[answer[t]][1]
-	# 	if time < startTime:
-	# 		time =startTime+burst
-	# 		print(burst)
-	# 	else:
-	# 		time += burst
-	# 		print(time-startTime)
-
-	# 	#time +=test_nodes[answer[t]][1]
-	# 	#time -= test_nodes[answer[t]][0]
-	# 	t+=1
+	
 	return total
 
 avgWaitingTime = waitingTime(0)/n
